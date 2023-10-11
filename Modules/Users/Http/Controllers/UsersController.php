@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Core\Entities\User;
+use Modules\Users\Http\Requests\UserRequest;
 
 class UsersController extends Controller
 {
@@ -48,9 +49,9 @@ class UsersController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+//        dd($request->all());
     }
 
     /**
