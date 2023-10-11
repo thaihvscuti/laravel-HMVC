@@ -11,6 +11,19 @@
 |
 */
 
-Route::prefix('core')->group(function() {
+//Route::prefix('core')->group(function() {
+//    Route::get('/', 'CoreController@index');
+//});
+
+
+use Illuminate\Support\Facades\Route;
+use Modules\Core\Http\Controllers\HomeController;
+
+Auth::routes();
+
+//Route::group([
+//    'middleware' => 'auth'
+//], function () {
     Route::get('/', 'CoreController@index');
-});
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+//});
