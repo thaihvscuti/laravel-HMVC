@@ -1,15 +1,20 @@
 {
     "private": true,
     "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+        "dev": "vite",
+        "build": "vite build"
     },
     "devDependencies": {
-    "axios": "^0.21.4",
-    "dotenv": "^10.0.0",
-    "dotenv-expand": "^5.1.0",
-    "lodash": "^4.17.21",
-    "postcss": "^8.3.7",
-    "vite": "^3.0.9"
+        "axios": "^0.21.4",
+        "dotenv": "^10.0.0",
+        "dotenv-expand": "^5.1.0",
+        "lodash": "^4.17.21",
+        "postcss": "^8.3.7",
+        "sass": "^1.69.2",
+        "vite": "^3.0.9"
+    },
+    "dependencies": {
+        "@coreui/coreui": "^4.3.2",
+        "@popperjs/core": "^2.11.8"
     }
 }
