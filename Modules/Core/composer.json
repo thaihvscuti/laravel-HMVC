@@ -21,6 +21,6 @@
         }
     },
     "require": {
-        "laravel/ui": "^4.2"
+
     }
 }
