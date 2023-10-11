@@ -21,9 +21,9 @@ use Modules\Core\Http\Controllers\HomeController;
 
 Auth::routes();
 
-//Route::group([
-//    'middleware' => 'auth'
-//], function () {
+Route::group([
+    'middleware' => 'auth'
+], function () {
     Route::get('/', 'CoreController@index');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-//});
+});
