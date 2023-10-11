@@ -3,3 +3,17 @@ html:not([dir=rtl]) {
         padding-left: var(--cui-sidebar-occupy-start,0);
     }
 }
+.pagination__container {
+  nav {
+    ul {
+      justify-content: end;
+      flex-wrap: wrap;
+
+      li {
+        a {
+          color: #000;
+        }
+      }
+    }
+  }
+}

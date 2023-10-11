@@ -16,7 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    Route::prefix('user')->group(function() {
-        Route::get('/', 'UsersController@index')->name('user.index');
-    });
+    Route::resource('user', \Modules\Users\Http\Controllers\UsersController::class);
 });

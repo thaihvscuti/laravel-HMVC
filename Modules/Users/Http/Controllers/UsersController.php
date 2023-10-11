@@ -5,6 +5,7 @@ namespace Modules\Users\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Core\Entities\User;
 
 class UsersController extends Controller
 {
@@ -15,8 +16,10 @@ class UsersController extends Controller
     public function index()
     {
         $breadcrumbs = ['User'];
+        $users = User::paginate(20);
         return view('users::index', [
             'breadcrumbs' => $breadcrumbs,
+            'users' => $users,
         ]);
     }
 
@@ -26,7 +29,18 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users::create');
+        $breadcrumbs = [
+            [
+                'url' => route('user.index'),
+                'name' => 'User'
+            ],
+            'Create',
+        ];
+        $title = "Create user";
+        return view('users::create', [
+            'breadcrumbs' => $breadcrumbs,
+            'title' => $title,
+        ]);
     }
 
     /**
