@@ -15,7 +15,7 @@ class CoreDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
+        \Modules\Core\Entities\User::factory()->count(50)->create();
         // $this->call("OthersTableSeeder");
     }
 }
