@@ -5,6 +5,7 @@ namespace Modules\Users\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 use Modules\Core\Entities\User;
 use Modules\Users\Http\Requests\UserRequest;
 
@@ -51,7 +52,12 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-//        dd($request->all());
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make('12345678');
+        $user->save();
+        return redirect()->route('user.index');
     }
 
     /**
@@ -71,7 +77,20 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return view('users::edit');
+        $title = 'Edit user';
+        $breadcrumbs = [
+            [
+                'url' => route('user.index'),
+                'name' => 'User'
+            ],
+            'Edit',
+        ];
+        $user = User::findOrFail($id);
+        return view('users::edit', [
+            'user' => $user,
+            'breadcrumbs' => $breadcrumbs,
+            'title' => $title,
+        ]);
     }
 
     /**

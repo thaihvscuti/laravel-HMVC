@@ -23,6 +23,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Created at</th>
+                            <td></td>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,17 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ date('Y-m-d H:i', strtotime($user->created_at)) }}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-coreui-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="{{ route('user.edit', $user->id) }}"><i class="fa-solid fa-pen me-2"></i>Edit</a></li>
+                                                <li><button class="dropdown-item"><i class="fa-regular fa-trash-can me-2"></i>Delete</button></li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
