@@ -28,7 +28,7 @@ class UsersController extends Controller
         }
         $users = $users->orderBy('updated_at', 'desc')
             ->paginate(20)
-            ->appends(request()->query());
+            ->withQueryString();
         return view('users::index', [
             'breadcrumbs' => $breadcrumbs,
             'users' => $users,
