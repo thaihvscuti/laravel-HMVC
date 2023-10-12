@@ -4,11 +4,11 @@ namespace Modules\Users\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Modules\Core\Entities\User;
+use Modules\Core\Http\Controllers\Controller;
 use Modules\Users\Http\Requests\UserRequest;
 
 class UsersController extends Controller

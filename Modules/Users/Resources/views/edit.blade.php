@@ -20,7 +20,7 @@
                         </div>
                         <div class="action d-flex justify-content-center">
                             <a href="{{ route('user.index') }}" class="btn btn-secondary">Back</a>
-                            <button type="submit" class="btn btn-primary ms-1">Create</button>
+                            <button type="submit" class="btn btn-primary ms-1">Update</button>
                         </div>
                     </form>
                 </div>

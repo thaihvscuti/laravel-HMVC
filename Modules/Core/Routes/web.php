@@ -17,7 +17,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use Modules\Core\Http\Controllers\HomeController;
+use Modules\Core\Http\Controllers\SettingsController;
 
 Auth::routes();
 
@@ -25,4 +25,5 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
     Route::get('/', 'CoreController@index')->name('home');
+    Route::resource('setting', SettingsController::class);
 });
