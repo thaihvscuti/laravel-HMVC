@@ -26,7 +26,7 @@ class UsersController extends Controller
             $users = $users->where('name', 'like', '%'.trim($request->search).'%')
                 ->orWhere('email', 'like', '%'.trim($request->search).'%');
         }
-        $users = $users->orderBy('updated_at', 'desc')
+        $users = $users->sortable(['updated_at' => 'desc'])
             ->paginate(20)
             ->withQueryString();
         return view('users::index', [
