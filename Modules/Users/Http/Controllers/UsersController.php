@@ -22,9 +22,11 @@ class UsersController extends Controller
         $breadcrumbs = ['User'];
         $userModel = new User();
         $users = $userModel->where('id', '!=', Auth::user()->id);
-        if ($request->search) {
-            $users = $users->where('name', 'like', '%'.trim($request->search).'%')
-                ->orWhere('email', 'like', '%'.trim($request->search).'%');
+        if ($request->search && $request->search != '') {
+            $users = $users->where(function ($q) use ($request) {
+                $q->orWhere('name', 'like', '%'.trim($request->search).'%');
+                $q->orWhere('email', 'like', '%'.trim($request->search).'%');
+            });
         }
         $users = $users->sortable(['updated_at' => 'desc'])
             ->paginate(20)
