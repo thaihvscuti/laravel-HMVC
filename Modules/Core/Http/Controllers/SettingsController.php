@@ -94,11 +94,14 @@ class SettingsController extends Controller
             'Edit',
         ];
         $module = ModuleModel::findOrFail($id);
-        return view('core::setting.edit', [
-            'title' => $title,
-            'breadcrumbs' => $breadcrumbs,
-            'module' => $module,
-        ]);
+        if ($module->name !== ModuleModel::MODULE_CORE) {
+            return view('core::setting.edit', [
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'module' => $module,
+            ]);
+        }
+        return redirect()->route('setting.index');
     }
 
     /**

@@ -15,6 +15,8 @@ class Module extends Model
 
     CONST DISABLED = 0;
 
+    const MODULE_CORE = 'Core';
+
     protected $fillable = ['name', 'status'];
 
     protected $appends = ['status_text'];
