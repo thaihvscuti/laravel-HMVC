@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Modules\Core\Entities\User;
 use Modules\Users\Http\Requests\UserRequest;
 
@@ -16,12 +17,18 @@ class UsersController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumbs = ['User'];
-        $users = User::where('id', '!=', Auth::user()->id)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(20);
+        $userModel = new User();
+        $users = $userModel->where('id', '!=', Auth::user()->id);
+        if ($request->search) {
+            $users = $users->where('name', 'like', '%'.trim($request->search).'%')
+                ->orWhere('email', 'like', '%'.trim($request->search).'%');
+        }
+        $users = $users->orderBy('updated_at', 'desc')
+            ->paginate(20)
+            ->appends(request()->query());
         return view('users::index', [
             'breadcrumbs' => $breadcrumbs,
             'users' => $users,
@@ -60,6 +67,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make('12345678');
         $user->save();
+        Session::flash('message-success', 'Successfully created user!');
         return redirect()->route('user.index');
     }
 
@@ -108,6 +116,7 @@ class UsersController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->update();
+        Session::flash('message-success', 'Successfully updated user!');
         return redirect()->route('user.index');
     }
 
@@ -120,6 +129,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+        Session::flash('message-success', 'Successfully deleted user!');
         return redirect()->route('user.index');
     }
 }

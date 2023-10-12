@@ -8,12 +8,12 @@
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name">
+                        <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                         <div class="invalid-feedback">@error('name') {{ $message }} @enderror</div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
-                        <input type="email" class="form-control @error('email')is-invalid @enderror" id="email" name="email">
+                        <input type="email" class="form-control @error('email')is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
                         <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
                     </div>
                     <div class="action">
