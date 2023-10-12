@@ -15,7 +15,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('user.index') }}">
                 <svg class="nav-icon">
-                    <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer') }}"></use>
+                    <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-user') }}"></use>
                 </svg> User
             </a>
         </li>
