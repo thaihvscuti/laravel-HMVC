@@ -4,7 +4,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 mb-2">
-                <form method="post" action="{{ route('user.update', $user->id) }}">
+                <form method="POST" action="{{ route('user.update', $user->id) }}">
+                    {{ method_field('PUT') }}
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name <span class="text-danger">*</span></label>

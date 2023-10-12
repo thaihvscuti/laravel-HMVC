@@ -5,6 +5,7 @@ namespace Modules\Users\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Modules\Core\Entities\User;
 use Modules\Users\Http\Requests\UserRequest;
@@ -18,7 +19,9 @@ class UsersController extends Controller
     public function index()
     {
         $breadcrumbs = ['User'];
-        $users = User::paginate(20);
+        $users = User::where('id', '!=', Auth::user()->id)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20);
         return view('users::index', [
             'breadcrumbs' => $breadcrumbs,
             'users' => $users,
@@ -67,7 +70,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return view('users::show');
+        dd($id);
     }
 
     /**
@@ -99,9 +102,13 @@ class UsersController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->update();
+        return redirect()->route('user.index');
     }
 
     /**
@@ -111,6 +118,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('user.index');
     }
 }

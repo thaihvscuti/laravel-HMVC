@@ -40,8 +40,14 @@
                                                 Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="{{ route('user.edit', $user->id) }}"><i class="fa-solid fa-pen me-2"></i>Edit</a></li>
-                                                <li><button class="dropdown-item"><i class="fa-regular fa-trash-can me-2"></i>Delete</button></li>
+                                                <li><a class="dropdown-item" href="{{ route('user.edit', $user->id) }}">Edit</a></li>
+                                                <li>
+                                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                                        @csrf
+                                                        {{ method_field('DELETE') }}
+                                                        <button class="dropdown-item" type="submit">Delete</button>
+                                                    </form>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
