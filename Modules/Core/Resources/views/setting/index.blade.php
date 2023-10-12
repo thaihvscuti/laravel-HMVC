@@ -29,7 +29,6 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">@sortablelink('name', 'Name')</th>
                             <th scope="col">@sortablelink('status', 'Status')</th>
                             <th scope="col">@sortablelink('created_at', 'Created at')</th>
@@ -40,7 +39,6 @@
                         @if(!$modules->isEmpty())
                             @foreach($modules as $key => $module)
                                 <tr>
-                                    <th scope="row">{{ ++$key }}</th>
                                     <td>{{ $module->name }}</td>
                                     <td>{{ $module->status_text }}</td>
                                     <td>{{ date('Y-m-d H:i', strtotime($module->created_at)) }}</td>
@@ -58,7 +56,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5">No data</td>
+                                <td colspan="4">No data</td>
                             </tr>
                         @endif
                         </tbody>
