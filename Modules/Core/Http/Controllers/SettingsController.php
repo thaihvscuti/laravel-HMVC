@@ -13,7 +13,7 @@ class SettingsController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumbs = ['Settings'];
         $title = 'Settings';
@@ -38,8 +38,13 @@ class SettingsController extends Controller
         }
 
         $modules = new ModuleModel();
-        $modules = $modules->where('name', '!=', 'Core')
-            ->sortable(['updated_at' => 'desc'])
+        $modules = $modules->where('name', '!=', 'Core');
+        if ($request->search) {
+            $modules = $modules->where(function ($q) use ($request) {
+                $q->orWhere('name', 'like', '%'.trim($request->search).'%');
+            });
+        }
+        $modules = $modules->sortable(['updated_at' => 'desc'])
             ->paginate(20)
             ->withQueryString();
         return view('core::setting.index', [
