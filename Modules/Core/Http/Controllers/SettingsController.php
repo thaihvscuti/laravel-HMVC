@@ -17,26 +17,6 @@ class SettingsController extends Controller
     {
         $breadcrumbs = ['Settings'];
         $title = 'Settings';
-
-        $allModule = ModuleModel::all();
-        if ($allModule->isEmpty()) {
-            $moduleEnabled = Module::allEnabled();
-            foreach ($moduleEnabled as $value) {
-                $module = new ModuleModel();
-                $module->name = $value->getName();
-                $module->status = ModuleModel::ENABLED;
-                $module->save();
-            }
-
-            $moduleDisabled = Module::allDisabled();
-            foreach ($moduleDisabled as $value) {
-                $module = new ModuleModel();
-                $module->name = $value->getName();
-                $module->status = ModuleModel::DISABLED;
-                $module->save();
-            }
-        }
-
         $modules = new ModuleModel();
         $modules = $modules->where('name', '!=', 'Core');
         if ($request->search) {
