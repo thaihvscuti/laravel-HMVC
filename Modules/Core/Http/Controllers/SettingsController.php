@@ -94,7 +94,7 @@ class SettingsController extends Controller
             'Edit',
         ];
         $module = ModuleModel::findOrFail($id);
-        if ($module->name !== ModuleModel::MODULE_CORE) {
+        if ($module->name != ModuleModel::MODULE_CORE) {
             return view('core::setting.edit', [
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs,
@@ -115,14 +115,16 @@ class SettingsController extends Controller
         $moduleModel = ModuleModel::findOrFail($id);
         $moduleName = $moduleModel->name;
         $module = Module::find($moduleName);
-        if ($request->status) {
-            $moduleModel->status = ModuleModel::ENABLED;
-            $module->enable();
-        } else {
-            $moduleModel->status = ModuleModel::DISABLED;
-            $module->disable();
+        if ($moduleName != ModuleModel::MODULE_CORE) {
+            if ($request->status) {
+                $moduleModel->status = ModuleModel::ENABLED;
+                $module->enable();
+            } else {
+                $moduleModel->status = ModuleModel::DISABLED;
+                $module->disable();
+            }
+            $moduleModel->update();
         }
-        $moduleModel->update();
         return redirect()->route('setting.index');
     }
 

@@ -80,7 +80,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        dd($id);
+
     }
 
     /**
@@ -99,11 +99,14 @@ class UsersController extends Controller
             'Edit',
         ];
         $user = User::findOrFail($id);
-        return view('users::edit', [
-            'user' => $user,
-            'breadcrumbs' => $breadcrumbs,
-            'title' => $title,
-        ]);
+        if ($id != Auth::user()->id) {
+            return view('users::edit', [
+                'user' => $user,
+                'breadcrumbs' => $breadcrumbs,
+                'title' => $title,
+            ]);
+        }
+        return redirect()->route('user.index');
     }
 
     /**
@@ -115,10 +118,12 @@ class UsersController extends Controller
     public function update(UserRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->update();
-        Session::flash('message-success', 'Successfully updated user!');
+        if ($id != Auth::user()->id) {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->update();
+            Session::flash('message-success', 'Successfully updated user!');
+        }
         return redirect()->route('user.index');
     }
 
