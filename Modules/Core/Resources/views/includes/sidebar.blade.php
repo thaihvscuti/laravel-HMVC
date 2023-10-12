@@ -19,6 +19,13 @@
                 </svg> User
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('setting.index') }}">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
+                </svg> Settings
+            </a>
+        </li>
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
 </div>
